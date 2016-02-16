@@ -202,6 +202,7 @@ func Enroll(config *Config, xio XIO) bool {
 		"wtfismyip.com":             "ofkztxcohimx34la.onion",
 		"rows.io":                   "yz6yiv2hxyagvwy6.onion",
 		"DuckDuckGo":                "wlcpmruglhxp6quz.onion",
+		"ipredator.se":              "3iffdebkzzkpgipa.onion",
 	}
 
 	// Autoconfigure well known Tor hidden services.
