@@ -3,7 +3,7 @@ package main
 import (
 	"bytes"
 	"testing"
-	"tridentl.i/xmpp-go/xlib"
+	"trident.li/xmpp-go/xlib"
 )
 
 var escapingTests = []string{
