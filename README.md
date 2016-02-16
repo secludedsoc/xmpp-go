@@ -1,12 +1,26 @@
-xmpp-client setup
-=================
+# xmpp-go - A Golang XMPP Library with OTP support
 
-    go get github.com/agl/xmpp-client
+(Golang)[https://golang.org] library for implementation of XMPP clients.
+
+This code is based on Adam Langley's (xmpp-client)[https://github.com/agl/xmpp-client]
+
+ * OTP support is only for user2user communications.
+ * There is no MUC (Multi-User-Chat) support for OTP unfortunately as there is no such protocol (yet).
+
+## xmpp-client
+
+xmpp-client is the example client for the xmpp-go library.
+
+### xmpp-client setup
+
+Fetch xmpp-go with the standard xmpp-client:
+```
+go get github.com/tridentli/xmpp-go/xmpp-client
+```
 
 (If you don't have Go already installed then see below.)
 
-xmpp-client use
-===============
+### xmpp-client use
 
 xmpp-client is a simple XMPP client written in pure Go. It's a terminal program and so probably doesn't work on Windows.
 
@@ -36,34 +50,37 @@ If a contact name isn't recognised before a colon then it's ignored. Don't assum
 
 The client functions, but is very rudimentary.
 
-Installation instructions
-=========================
+### Installation instructions
 
 Build and run instructions for Ubuntu 13.10 (codename Saucy Salamander, go version 1.1.2). Note the version of Go shipped with this distro is very old any may be broken now.
 
-    sudo apt-get install git golang mercurial
-    export GOPATH=$HOME/go
-    go get github.com/agl/xmpp-client
-    $GOPATH/bin/xmpp-client
+```
+sudo apt-get install git golang mercurial
+export GOPATH=$HOME/go
+go get github.com/tridentli/xmpp-go/xmpp-client
+$GOPATH/bin/xmpp-client
 
-    ## If you want to set up an alias
-    echo "alias xmpp-client='$GOPATH/bin/xmpp-client' " >> ~/.bashrc
-    . ~/.bashrc
-    xmpp-client
+## If you want to set up an alias
+echo "alias xmpp-client='$GOPATH/bin/xmpp-client' " >> ~/.bashrc
+. ~/.bashrc
+xmpp-client
+```
 
 Build and run instructions for Tails (tested on version 1.2, go version 1.2)
+```
+# If you don't have already
+sudo apt-get update
+ 
+# Debian old-stable, on which Tails is currently based, doesn't have Go packages
+sudo apt-get install -t unstable golang
 
-    ## If you don't have already
-    sudo apt-get update
-    
-    ## Debian old-stable, on which Tails is currently based, doesn't have Go packages
-    sudo apt-get install -t unstable golang
+# Git is already included in tails so we only need to get Mercurial
+sudo apt-get install mercurial
 
-    ## Git is already included in tails so we only need to get Mercurial
-    sudo apt-get install mercurial
+# Assuming you have created a persistant volume
+export GOPATH=/home/amnesia/Persistent/go/
 
-    ## Assuming you have created a persistant volume
-    export GOPATH=/home/amnesia/Persistent/go/
+go get github.com/tridentli/xmpp-go/xmpp-client
+$GOPATH/bin/xmpp-client
+```
 
-    go get github.com/agl/xmpp-client
-    $GOPATH/bin/xmpp-client

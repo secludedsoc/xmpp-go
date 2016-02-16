@@ -2,4 +2,4 @@
 *.swp
 
 # Local Binary
-xmpp-client
+xmpp-client/xmpp-client
