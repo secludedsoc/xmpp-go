@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/tridentli/xmpp-go/xlib"
 	"reflect"
 	"testing"
+	"trident.li/xmpp-go/xlib"
 )
 
 const (

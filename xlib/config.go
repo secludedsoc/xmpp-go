@@ -11,9 +11,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/tridentli/xmpp-go/xmpp"
 	"golang.org/x/crypto/otr"
 	"golang.org/x/net/proxy"
+	"trident.li/xmpp-go/xmpp"
 )
 
 type Config struct {

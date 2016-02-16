@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/tridentli/xmpp-go/xlib"
 	"golang.org/x/crypto/ssh/terminal"
+	"trident.li/xmpp-go/xlib"
 )
 
 type uiCommand struct {

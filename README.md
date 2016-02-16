@@ -15,7 +15,7 @@ xmpp-client is the example client for the xmpp-go library.
 
 Fetch xmpp-go with the standard xmpp-client:
 ```
-go get github.com/tridentli/xmpp-go/xmpp-client
+go get trident.li/xmpp-go/xmpp-client
 ```
 
 (If you don't have Go already installed then see below.)
@@ -57,7 +57,7 @@ Build and run instructions for Ubuntu 13.10 (codename Saucy Salamander, go versi
 ```
 sudo apt-get install git golang mercurial
 export GOPATH=$HOME/go
-go get github.com/tridentli/xmpp-go/xmpp-client
+go get trident.li/xmpp-go/xmpp-client
 $GOPATH/bin/xmpp-client
 
 ## If you want to set up an alias
@@ -80,7 +80,7 @@ sudo apt-get install mercurial
 # Assuming you have created a persistant volume
 export GOPATH=/home/amnesia/Persistent/go/
 
-go get github.com/tridentli/xmpp-go/xmpp-client
+go get trident.li/xmpp-go/xmpp-client
 $GOPATH/bin/xmpp-client
 ```
 

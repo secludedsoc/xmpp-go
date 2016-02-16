@@ -15,9 +15,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tridentli/xmpp-go/caroots"
-	"github.com/tridentli/xmpp-go/xmpp"
 	"golang.org/x/crypto/otr"
+	"trident.li/xmpp-go/caroots"
+	"trident.li/xmpp-go/xmpp"
 )
 
 var NEWLINE = []byte{'\n'}

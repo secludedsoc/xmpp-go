@@ -8,9 +8,9 @@ import (
 	"path/filepath"
 	"syscall"
 
-	"github.com/tridentli/xmpp-go/xlib"
-	"github.com/tridentli/xmpp-go/xmpp"
 	"golang.org/x/crypto/otr"
+	"trident.li/xmpp-go/xlib"
+	"trident.li/xmpp-go/xmpp"
 )
 
 var configFile *string = flag.String("config-file", "", "Location of the config file")

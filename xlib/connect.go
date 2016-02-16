@@ -5,11 +5,11 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
-	"github.com/tridentli/xmpp-go/xmpp"
 	"golang.org/x/net/proxy"
 	"io"
 	"net/url"
 	"strings"
+	"trident.li/xmpp-go/xmpp"
 )
 
 func UserDom(account string) (user, domain string, err error) {

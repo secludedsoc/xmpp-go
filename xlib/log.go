@@ -6,7 +6,7 @@ import (
 	"os"
 	"sync"
 
-	"github.com/tridentli/xmpp-go/xmpp"
+	"trident.li/xmpp-go/xmpp"
 )
 
 func SetupRawLog(filename string, xmppConfig *xmpp.Config) (err error) {
