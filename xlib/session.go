@@ -396,9 +396,12 @@ func (s *Session) ProcessClientMessage(stanza *xmpp.ClientMessage) {
 		s.Xio.Info(fmt.Sprintf("%s appears to support OTRv%d. You should encourage them to upgrade their OTR client!", from, detectedOTRVersion))
 	}
 
+	delayed := false
+
 	var timestamp string
 	var messageTime time.Time
 	if stanza.Delay != nil && len(stanza.Delay.Stamp) > 0 {
+		delayed = true
 		// An XEP-0203 Delayed Delivery <delay/> element exists for
 		// this message, meaning that someone sent it while we were
 		// offline. Let's show the timestamp for when the message was
@@ -415,7 +418,7 @@ func (s *Session) ProcessClientMessage(stanza *xmpp.ClientMessage) {
 		timestamp = messageTime.Format(time.Stamp)
 	}
 
-	s.Xio.Message(timestamp, from, to, channel, out, encrypted, s.config.Bell)
+	s.Xio.Message(timestamp, from, to, channel, out, encrypted, s.config.Bell, delayed)
 	s.maybeNotify()
 }
 

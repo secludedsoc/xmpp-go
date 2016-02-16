@@ -83,7 +83,7 @@ func (xio *XIOTerm) SetPromptEnc(target string, isEncrypted bool) {
 	xio.SetPrompt(string(prompt))
 }
 
-func (xio *XIOTerm) Message(timestamp, from, to, channel string, msg []byte, isEncrypted bool, doBell bool) {
+func (xio *XIOTerm) Message(timestamp, from, to, channel string, msg []byte, isEncrypted bool, doBell bool, delayed bool) {
 	var line []byte
 
 	if isEncrypted {
