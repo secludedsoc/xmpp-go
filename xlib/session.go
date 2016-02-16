@@ -15,8 +15,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/agl/xmpp-client/caroots"
-	"github.com/agl/xmpp-client/xmpp"
+	"github.com/tridentli/xmpp-go/caroots"
+	"github.com/tridentli/xmpp-go/xmpp"
 	"golang.org/x/crypto/otr"
 )
 

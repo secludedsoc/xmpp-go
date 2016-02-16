@@ -2,7 +2,7 @@ package main
 
 import (
 	"bytes"
-	"github.com/agl/xmpp-client/xlib"
+	"github.com/tridentli/xmpp-go/xlib"
 	"testing"
 )
 

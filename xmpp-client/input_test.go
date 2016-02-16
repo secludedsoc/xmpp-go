@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/agl/xmpp-client/xlib"
+	"github.com/tridentli/xmpp-go/xlib"
 	"reflect"
 	"testing"
 )

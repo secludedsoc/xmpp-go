@@ -11,7 +11,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/agl/xmpp-client/xmpp"
+	"github.com/tridentli/xmpp-go/xmpp"
 	"golang.org/x/crypto/otr"
 	"golang.org/x/net/proxy"
 )

@@ -5,7 +5,7 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
-	"github.com/agl/xmpp-client/xmpp"
+	"github.com/tridentli/xmpp-go/xmpp"
 	"golang.org/x/net/proxy"
 	"io"
 	"net/url"

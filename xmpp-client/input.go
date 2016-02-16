@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/agl/xmpp-client/xlib"
+	"github.com/tridentli/xmpp-go/xlib"
 	"golang.org/x/crypto/ssh/terminal"
 )
 

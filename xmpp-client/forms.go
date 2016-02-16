@@ -8,9 +8,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/agl/xmpp-client/xmpp"
-
-	"github.com/agl/xmpp-client/xlib"
+	"github.com/tridentli/xmpp-go/xlib"
+	"github.com/tridentli/xmpp-go/xmpp"
 )
 
 // promptForForm runs an XEP-0004 form and collects responses from the user.
