@@ -201,6 +201,7 @@ func Enroll(config *Config, xio XIO) bool {
 		"jabber.otr.im":             "5rgdtlawqkcplz75.onion",
 		"wtfismyip.com":             "ofkztxcohimx34la.onion",
 		"rows.io":                   "yz6yiv2hxyagvwy6.onion",
+		"DuckDuckGo":                "wlcpmruglhxp6quz.onion",
 	}
 
 	// Autoconfigure well known Tor hidden services.
