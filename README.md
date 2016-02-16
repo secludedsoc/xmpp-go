@@ -1,8 +1,8 @@
 # xmpp-go - A Golang XMPP Library with OTP support
 
-(Golang)[https://golang.org] library for implementation of XMPP clients.
+[Golang](https://golang.org) library for implementation of XMPP clients.
 
-This code is based on Adam Langley's (xmpp-client)[https://github.com/agl/xmpp-client]
+This code is based on Adam Langley's [xmpp-client](https://github.com/agl/xmpp-client)
 
  * OTP support is only for user2user communications.
  * There is no MUC (Multi-User-Chat) support for OTP unfortunately as there is no such protocol (yet).
