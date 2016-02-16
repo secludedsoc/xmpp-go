@@ -7,9 +7,15 @@ This code is based on Adam Langley's [xmpp-client](https://github.com/agl/xmpp-c
  * OTP support is only for user2user communications.
  * There is no MUC (Multi-User-Chat) support for OTP unfortunately as there is no such protocol (yet).
 
+## simple
+
+```simple``` is a very simple XMPP client, great starting point for extending it
+
 ## xmpp-client
 
-xmpp-client is the example client for the xmpp-go library.
+```xmpp-client``` is the example client for the xmpp-go library.
+
+This matches the original [xmpp-client](https://github.com/agl/xmpp-client).
 
 ### xmpp-client setup
 
