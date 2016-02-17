@@ -475,10 +475,28 @@ func (s *Session) ProcessPresence(stanza *xmpp.ClientPresence) {
 	case "":
 		break
 	default:
+		s.Xio.Debug("Ignoring unknown presence update '%s' from %s", stanza.Type, stanza.From)
 		return
 	}
 
 	from, fromres := xmpp.SplitJid(stanza.From)
+
+	/* Keep track of users in a MUC */
+	if s.IsMUC(from) && len(stanza.UserItems) > 0 {
+		for _, u := range stanza.UserItems {
+			jid := xmpp.RemoveResourceFromJid(u.Jid)
+			if gone {
+				s.Xio.Debug("Removing JID %s, channel: %s, fromres: %s\n", jid, from, fromres)
+				delete(s.chanJidMap[from], fromres)
+			} else {
+				s.Xio.Debug("Adding JID %s, channel: %s, fromres: %s\n", jid, from, fromres)
+				s.chanJidMap[from][fromres] = jid
+			}
+
+			chn = from
+			from = jid
+		}
+	}
 
 	if gone {
 		if _, ok := s.knownStates[from]; !ok {
@@ -497,16 +515,6 @@ func (s *Session) ProcessPresence(stanza *xmpp.ClientPresence) {
 			return
 		}
 		s.knownStates[from] = stanza.Show
-	}
-
-	/* Keep track of users in a MUC */
-	if s.IsMUC(from) && len(stanza.UserItems) > 0 {
-		for _, u := range stanza.UserItems {
-			jid := xmpp.RemoveResourceFromJid(u.Jid)
-			s.chanJidMap[from][fromres] = jid
-			chn = from
-			from = jid
-		}
 	}
 
 	if !s.config.HideStatusUpdates {
@@ -948,6 +956,18 @@ func (s *Session) ToggleStatusUpdates() {
 	} else {
 		s.Xio.Info("Status updates enabled")
 	}
+}
+
+func (s *Session) MsgF(to string, encch chan<- bool, format string, a ...interface{}) {
+	s.Msg(to, fmt.Sprintf(format, a...), encch)
+}
+
+func (s *Session) MsgNF(to string, format string, a ...interface{}) {
+	s.Msg(to, fmt.Sprintf(format, a...), nil)
+}
+
+func (s *Session) MsgN(to string, msg string) {
+	s.Msg(to, msg, nil)
 }
 
 func (s *Session) Msg(to string, msg string, encch chan<- bool) {
