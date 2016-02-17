@@ -273,17 +273,22 @@ func (c *Conn) SendIQReply(to, typ, id string, value interface{}) error {
 	return err
 }
 
+func (c *Conn) ArchiveOpts() string {
+	if c.archive {
+		return ""
+	}
+
+	// The first part of archive is from google:
+	// See https://developers.google.com/talk/jep_extensions/otr
+	// The second part of the stanza is from XEP-0136
+	// http://xmpp.org/extensions/xep-0136.html#pref-syntax-item-otr
+	// http://xmpp.org/extensions/xep-0136.html#otr-nego
+	return "<nos:x xmlns:nos='google:nosave' value='enabled'/><arc:record xmlns:arc='http://jabber.org/protocol/archive' otr='require'/>"
+}
+
 // Send sends an IM message to the given user.
 func (c *Conn) Send(to, msg string) error {
-	archive := ""
-	if !c.archive {
-		// The first part of archive is from google:
-		// See https://developers.google.com/talk/jep_extensions/otr
-		// The second part of the stanza is from XEP-0136
-		// http://xmpp.org/extensions/xep-0136.html#pref-syntax-item-otr
-		// http://xmpp.org/extensions/xep-0136.html#otr-nego
-		archive = "<nos:x xmlns:nos='google:nosave' value='enabled'/><arc:record xmlns:arc='http://jabber.org/protocol/archive' otr='require'/>"
-	}
+	archive := c.ArchiveOpts()
 
 	// Only non-'chat' types are listed
 	chattype, cok := c.chatTypes[to]
@@ -338,6 +343,13 @@ func (c *Conn) LeaveMUC(to string) error {
 	/* Unregister as group chat */
 	delete(c.chatTypes, to)
 
+	return err
+}
+
+func (c *Conn) SetMUCSubject(jid, subject string) error {
+	archive := c.ArchiveOpts()
+
+	_, err := fmt.Fprintf(c.out, "<message type='groupchat' to='%s'><subject>%s</subject></message>", xmlEscape(jid), xmlEscape(subject), archive)
 	return err
 }
 
