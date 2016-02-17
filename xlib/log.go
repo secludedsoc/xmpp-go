@@ -2,6 +2,7 @@ package xlib
 
 import (
 	"bytes"
+	"fmt"
 	"io"
 	"os"
 	"sync"
@@ -49,6 +50,7 @@ func (r *rawLogger) Write(data []byte) (int, error) {
 	defer r.lock.Unlock()
 
 	if err := r.other.flush(); err != nil {
+		fmt.Printf("RawLogger:Write->other.flush failed: %s\n", err.Error())
 		return 0, nil
 	}
 
@@ -61,6 +63,10 @@ func (r *rawLogger) Write(data []byte) (int, error) {
 			r.buf = append(r.buf, data...)
 			data = nil
 		}
+	}
+
+	if err := r.flush(); err != nil {
+		fmt.Printf("RawLogger:Write->this.flush failed: %s\n", err.Error())
 	}
 
 	return origLen, nil
