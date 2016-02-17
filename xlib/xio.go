@@ -5,7 +5,7 @@ type XIOAutoCompleteCallbackI func(line string, pos int, key rune) (string, int,
 type XIO interface {
 	Info(msg string)
 	Warn(msg string)
-	//	Msg(msg string)
+	Debug(format string, a ...interface{})
 	Alert(msg string)
 	Critical(msg string)
 	ReadPassword(msg string) (password string, err error)

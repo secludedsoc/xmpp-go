@@ -53,6 +53,10 @@ func (xio *XIOTerm) Warn(msg string) {
 	xio.terminalMessage(xio.term.Escape.Magenta, msg, false)
 }
 
+func (xio *XIOTerm) Debug(format string, a ...interface{}) {
+	xio.terminalMessage(xio.term.Escape.White, fmt.Sprintf(format, a...), false)
+}
+
 func (xio *XIOTerm) Alert(msg string) {
 	xio.terminalMessage(xio.term.Escape.Red, msg, false)
 }
