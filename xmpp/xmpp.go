@@ -291,10 +291,12 @@ func (c *Conn) Send(to, msg string) error {
 	archive := c.ArchiveOpts()
 
 	// Only non-'chat' types are listed
+	c.lock.Lock()
 	chattype, cok := c.chatTypes[to]
 	if !cok {
 		chattype = "chat"
 	}
+	c.lock.Unlock()
 
 	_, err := fmt.Fprintf(c.out, "<message to='%s' from='%s' type='%s'><body>%s</body>%s</message>", xmlEscape(to), xmlEscape(c.jid), chattype, xmlEscape(msg), archive)
 	return err
@@ -332,7 +334,9 @@ func (c *Conn) JoinMUC(to, nick, password string) error {
 	_, err := fmt.Fprintf(c.out, "<presence to='%s/%s'>\n<x xmlns='http://jabber.org/protocol/muc'>\n%s</x>\n</presence>", xmlEscape(to), xmlEscape(nick), pw)
 
 	/* Register this as a groupchat */
+	c.lock.Lock()
 	c.chatTypes[to] = "groupchat"
+	c.lock.Unlock()
 	return err
 }
 
@@ -341,7 +345,9 @@ func (c *Conn) LeaveMUC(to string) error {
 	_, err := fmt.Fprintf(c.out, "<presence from='%s' to='%s' type='unavailable' />", c.jid, xmlEscape(to))
 
 	/* Unregister as group chat */
+	c.lock.Lock()
 	delete(c.chatTypes, to)
+	c.lock.Unlock()
 
 	return err
 }
@@ -355,7 +361,9 @@ func (c *Conn) SetMUCSubject(jid, subject string) error {
 
 func (c *Conn) IsMUC(jid string) bool {
 	// Only non-'chat' types are listed
+	c.lock.Lock()
 	ctype, cok := c.chatTypes[jid]
+	c.lock.Unlock()
 	if !cok || ctype != "groupchat" {
 		return false
 	}

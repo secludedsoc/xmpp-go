@@ -423,7 +423,9 @@ func (s *Session) ProcessClientMessage(stanza *xmpp.ClientMessage) {
 }
 
 func (s *Session) LastAction() {
+	s.lock.Lock()
 	s.lastActionTime = time.Now()
+	s.lock.Unlock()
 }
 
 func (s *Session) maybeNotify() {
@@ -432,6 +434,10 @@ func (s *Session) maybeNotify() {
 	if idleThreshold == 0 {
 		idleThreshold = 60
 	}
+
+	s.lock.Lock()
+	defer s.lock.Unlock()
+
 	notifyTime := s.lastActionTime.Add(time.Duration(idleThreshold) * time.Second)
 	if now.Before(notifyTime) {
 		return
