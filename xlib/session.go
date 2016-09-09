@@ -5,6 +5,7 @@ import (
 	"crypto/x509"
 	"encoding/hex"
 	"encoding/xml"
+	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -812,7 +813,7 @@ NextAdd:
 	return true
 }
 
-func NewSession(config *Config, xio XIO) (s *Session) {
+func NewSession(config *Config, xio XIO) (s *Session, err error) {
 	s = &Session{
 		account:           config.Account,
 		Xio:               xio,
@@ -830,7 +831,12 @@ func NewSession(config *Config, xio XIO) (s *Session) {
 		uidComplete: new(PriorityList),
 	}
 
-	s.privateKey.Parse(config.PrivateKey)
+	_, ok := s.privateKey.Parse(config.PrivateKey)
+	if !ok {
+		err = errors.New("Failed to parse private key from config")
+		s = nil
+	}
+
 	return
 }
 

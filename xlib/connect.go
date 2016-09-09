@@ -116,7 +116,11 @@ func Connect(xio XIO, config *Config, logger io.Writer, formcb xmpp.FormCallback
 		}
 	}
 
-	s = NewSession(config, xio)
+	s, err = NewSession(config, xio)
+	if err != nil {
+		err = errors.New("Session creation failed: " + err.Error())
+		return
+	}
 
 	err = s.Dial(addr, user, domain, config.Password, xmppConfig)
 	if err != nil {
