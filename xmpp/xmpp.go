@@ -554,7 +554,7 @@ func printTLSDetails(w io.Writer, tlsState tls.ConnectionState) {
 
 // Dial creates a new connection to an XMPP server, authenticates as the
 // given user.
-func Dial(address, user, domain, password string, config *Config) (c *Conn, err error) {
+func Dial(address, user, domain, resource, password string, config *Config) (c *Conn, err error) {
 	c = new(Conn)
 	c.inflights = make(map[Cookie]inflight)
 	c.chatTypes = make(map[string]string)
@@ -721,8 +721,16 @@ func Dial(address, user, domain, password string, config *Config) (c *Conn, err 
 		return nil, err
 	}
 
-	// Send IQ message asking to bind to the local user name.
-	fmt.Fprintf(c.out, "<iq type='set' id='bind_1'><bind xmlns='%s'/></iq>", NsBind)
+	if len(resource) == 0 {
+		// Send IQ message asking to bind to the local user name.
+		fmt.Fprintf(c.out, "<iq type='set' id='bind_1'><bind xmlns='%s'/></iq>", NsBind)
+	} else {
+		// Send IQ with user-selected resource
+		fmt.Fprintf(c.out,
+			"<iq type='set' id='bind_2'><bind xmlns='%s'><resource>%s</resource></bind></iq>",
+			NsBind, xmlEscape(resource))
+	}
+
 	var iq ClientIQ
 	if err = c.in.DecodeElement(&iq, nil); err != nil {
 		return nil, errors.New("unmarshal <iq>: " + err.Error())

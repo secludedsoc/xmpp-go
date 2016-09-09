@@ -122,7 +122,7 @@ func Connect(xio XIO, config *Config, logger io.Writer, formcb xmpp.FormCallback
 		return
 	}
 
-	err = s.Dial(addr, user, domain, config.Password, xmppConfig)
+	err = s.Dial(addr, user, domain, config.Resource, config.Password, xmppConfig)
 	if err != nil {
 		err = errors.New("Failed to connect to XMPP server: " + err.Error())
 		return

@@ -840,7 +840,7 @@ func NewSession(config *Config, xio XIO) (s *Session, err error) {
 	return
 }
 
-func (s *Session) Dial(addr, user, domain, password string, cfg *xmpp.Config) (err error) {
+func (s *Session) Dial(addr, user, domain, resource, password string, cfg *xmpp.Config) (err error) {
 
 	if domain == "jabber.ccc.de" {
 		// jabber.ccc.de uses CACert but distros are removing that root
@@ -856,7 +856,7 @@ func (s *Session) Dial(addr, user, domain, password string, cfg *xmpp.Config) (e
 		}
 	}
 
-	s.Conn, err = xmpp.Dial(addr, user, domain, password, cfg)
+	s.Conn, err = xmpp.Dial(addr, user, domain, resource, password, cfg)
 	if err != nil {
 		return
 	}
